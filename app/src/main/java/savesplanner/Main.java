@@ -3,13 +3,22 @@ package savesplanner;
 
 public class Main {
     public static void main(String[] args) {
-        // double precio = Calculator.futurePrice(100, 1.845/12, 12);
-        // System.out.println("Hello world!");
-        // System.out.println(precio);
+        /*
+         * TODO:
+         * Mejorar la interfaz, esto significa:
+         * - Utilizar la misma notación para inflación en todos lados.
+         * - Esta será la de un multiplicador.
+         * -> ejemplo "30% de aumento -> 1.03"
+         * 
+         * FIXME:
+         * El algoritmo explota cuando usamos un finalInteres<1
+         */
+
+        int periods = 12;
         double currentPrice = 100;
-        double interest = Calculator.interestForPeriod(200);
-        double price = Calculator.futurePrice(currentPrice, interest, 3);
-        System.out.println(interest);
+        double interest = Calculator.interestForPeriod(1.1, periods);
+        double price = Calculator.futurePrice(currentPrice, interest, periods);
+        System.out.println(interest*100);
         System.out.println(price);
     }
 }
