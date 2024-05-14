@@ -1,6 +1,9 @@
 package savesplanner;
 // import savesplanner.Calculator;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Main {
     public static void main(String[] args) {
         /*
@@ -15,11 +18,23 @@ public class Main {
          */
 
         int periods = 12;
-        double currentPrice = 100;
-        double interest = Calculator.interestForPeriod(1.1, periods);
-        double price = Calculator.futurePrice(currentPrice, interest, periods);
-        System.out.println(interest*100);
-        System.out.println(price);
+        double[] payments = new double[periods];
+        try {
+            payments = Calculator.savingsPlanner(3*Math.pow(10, 6), 2.61,periods);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Locale current_Locale = Locale.getDefault();
+        NumberFormat numberFormatter = NumberFormat.getNumberInstance(current_Locale);
+
+        double sum = 0;
+        for (double p: payments){
+            sum += p;
+            System.out.println(numberFormatter.format(p));
+        }
+        System.out.format("total: %s", numberFormatter.format(sum));
+
     }
 }
 
