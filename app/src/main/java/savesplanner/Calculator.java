@@ -42,17 +42,6 @@ class NewtonBinomial implements UnivariateFunction{
 
 public class Calculator {
     public static double futurePrice(double currentPrice, double interestRate, int periods){
-        /*
-         * FIXME:
-         * 
-         * Comportamiento extraño
-         * currentPrice: 100
-         * interesRate: 0.29803579673171043
-         * Salida: 218.7056528420159
-         * Salida esperada: 200
-         * 
-         * ¿Qué pasó?
-         */
         double price = currentPrice;
 
         for (int i = 1; i <= periods; i++){
@@ -68,6 +57,32 @@ public class Calculator {
         BisectionSolver solver = new BisectionSolver();
         double res = solver.solve(1000, function, 0,1000);
         
+        return res;
+    }
+    public static double[] savingsPlanner(double goal, double interest, int periods) throws Exception{
+        if (goal <= 0){
+            throw new Exception("the savings goal must be greather than 0");
+        }
+        if (periods <= 0){
+            throw new Exception("periods must be a positive integer");
+        }
+        if (interest < 1){
+            throw new Exception("estimated interest must be double number greather than 1");
+        }
+
+        double pagado = 0;
+        double[] res = new double[periods];
+        double finalGoal = goal;
+        double ipp = Calculator.interestForPeriod(interest, periods);
+
+        for (int i = 0; i < periods; i++){
+            finalGoal += finalGoal * ipp;
+            double cuota = (finalGoal-pagado)/(periods-i);
+            pagado += cuota;
+            res[i] = cuota;
+        }
+
+        // double[] res = {0.0,0.1};
         return res;
     }
 }
