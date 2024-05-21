@@ -17,10 +17,11 @@ public class Main {
          * El algoritmo explota cuando usamos un finalInteres<1
          */
 
-        int periods = 12;
+        double interest = (1+0.33);
+        int periods = 2;
         double[] payments = new double[periods];
         try {
-            payments = Calculator.savingsPlanner(3*Math.pow(10, 6), 2.61,periods);
+            payments = Calculator.savingsPlanner(1, interest,periods);
         } catch (Exception e) {
             e.printStackTrace();
         }

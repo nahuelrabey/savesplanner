@@ -75,6 +75,7 @@ public class Calculator {
         double finalGoal = goal;
         double ipp = Calculator.interestForPeriod(interest, periods);
 
+        System.out.println("ipp: "+ipp);
         for (int i = 0; i < periods; i++){
             finalGoal += finalGoal * ipp;
             double cuota = (finalGoal-pagado)/(periods-i);
@@ -84,5 +85,40 @@ public class Calculator {
 
         // double[] res = {0.0,0.1};
         return res;
+    }
+    public static double updateInflationPerPeriod(double[] pastPeriodsInflation, double prediction, int periods) throws Exception{
+        int calulatedPeriods = pastPeriodsInflation.length;
+        if (calulatedPeriods >= periods){
+            throw new Exception("all periods are calculated");
+        }
+
+        double accumulated = 1;
+        for (double inflation : pastPeriodsInflation){
+            accumulated *= (1+inflation);
+        }
+        System.out.println("accumulated: "+accumulated);
+        System.out.println("periods: "+periods);
+        System.out.println("calculated periods: "+(periods-calulatedPeriods));
+        System.out.println("remained periods: "+(periods-calulatedPeriods));
+
+        double pow = 1/(((double) periods)-((double) calulatedPeriods));
+        double res = Math.pow((prediction/accumulated), pow);
+        return res;
+    }
+
+    public static void main(String[] args){
+        System.out.println("Test 'updateInflationPerPeriod'");
+
+        double[] ppi = {0.10,0.12,0.08};
+        double ipp = 0.0;
+        try {
+            ipp = updateInflationPerPeriod(ppi, 2, 5);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println("ipp: "+ipp);
+        
+        // System.out.println(Math.pow(2/1.33, 1.0/2.0));
     }
 }
