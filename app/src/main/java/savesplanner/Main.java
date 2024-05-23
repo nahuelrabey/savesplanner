@@ -17,24 +17,24 @@ public class Main {
          * El algoritmo explota cuando usamos un finalInteres<1
          */
 
-        double interest = (1+0.33);
-        int periods = 2;
-        double[] payments = new double[periods];
-        try {
-            payments = Calculator.savingsPlanner(1, interest,periods);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // double interest = (1+0.33);
+        // int periods = 2;
+        // double[] payments = new double[periods];
+        // try {
+        //     payments = Calculator.savingsPlanner(1, interest,periods);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
 
-        Locale current_Locale = Locale.getDefault();
-        NumberFormat numberFormatter = NumberFormat.getNumberInstance(current_Locale);
+        // Locale current_Locale = Locale.getDefault();
+        // NumberFormat numberFormatter = NumberFormat.getNumberInstance(current_Locale);
 
-        double sum = 0;
-        for (double p: payments){
-            sum += p;
-            System.out.println(numberFormatter.format(p));
-        }
-        System.out.format("total: %s", numberFormatter.format(sum));
+        // double sum = 0;
+        // for (double p: payments){
+        //     sum += p;
+        //     System.out.println(numberFormatter.format(p));
+        // }
+        // System.out.format("total: %s", numberFormatter.format(sum));
 
     }
 }
